@@ -9,9 +9,6 @@
 import UIKit
 import AVKit
 
-import UIKit
-import AVKit
-
 class VideoPlayerViewController: AVPlayerViewController {
     
     convenience init(fileUrl: String) {
@@ -46,6 +43,7 @@ class VideoPlayerViewController: AVPlayerViewController {
     @objc private func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
         guard let vv = view.viewWithTag(1000) else { return }
         if vv.layer.transform.m11 < 1 && gesture.scale < 1 { return }
+        if vv.layer.transform.m11 > 3 && gesture.scale > 1 { return }
         vv.layer.transform = CATransform3DScale(vv.layer.transform, gesture.scale, gesture.scale, 0)
         gesture.scale = 1
     }
